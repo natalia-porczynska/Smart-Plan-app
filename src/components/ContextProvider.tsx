@@ -16,8 +16,8 @@ export const ContextProvider = (props: any) => {
     <>
       <myContext.Provider
         value={{
-          currentUserId,
           setCurrentUserId,
+          currentUserId,
           currentPostId,
           setCurrentPostId,
           currentCommentId,
