@@ -1,8 +1,8 @@
 import { FunctionComponent, useContext, useState } from "react";
-import { useAppDispatch } from "../../hooks/hooks";
 import ReactDOM from "react-dom";
+import { useAppDispatch } from "../../hooks/hooks";
 import { createUser, updateUser } from "../../api";
-import { myContext } from "../ContextProvider";
+import { myContext } from "../../Context/ContextProvider";
 
 import {
   Modal,
@@ -18,7 +18,7 @@ type UserModalProps = {
   type: string;
 };
 
-export const UserModal: FunctionComponent<UserModalProps> = ({
+const UserModal: FunctionComponent<UserModalProps> = ({
   isOpen,
   onClick,
   type,
@@ -26,8 +26,6 @@ export const UserModal: FunctionComponent<UserModalProps> = ({
   const dispatch = useAppDispatch();
 
   const { currentUserId } = useContext(myContext);
-
-  console.log(currentUserId);
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -48,10 +46,8 @@ export const UserModal: FunctionComponent<UserModalProps> = ({
     event.preventDefault();
     if (type === "UPDATE") {
       dispatch(updateUser(currentUserId, inputs));
-      console.log("uaktualniono usera");
     } else {
       dispatch(createUser(inputs));
-      console.log("dodano usera");
     }
   };
 
@@ -138,3 +134,5 @@ export const UserModal: FunctionComponent<UserModalProps> = ({
     document.body
   );
 };
+
+export default UserModal;

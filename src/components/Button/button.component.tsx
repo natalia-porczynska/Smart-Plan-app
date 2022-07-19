@@ -8,7 +8,8 @@ type ButtonProps = {
   href: string;
   onClick?: () => void;
 };
-export const Button: FunctionComponent<ButtonProps> = ({
+
+const Button: FunctionComponent<ButtonProps> = ({
   isPrimary = true,
   label = "go back",
   href,
@@ -22,3 +23,5 @@ export const Button: FunctionComponent<ButtonProps> = ({
     </ButtonWrapper>
   );
 };
+
+export default Button;

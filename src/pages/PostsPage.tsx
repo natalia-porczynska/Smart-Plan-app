@@ -1,20 +1,18 @@
-import { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { getPosts } from "../actions/posts";
-import { Container } from "../components/Container";
 import { useAppDispatch } from "../hooks/hooks";
-import { Header } from "../components/Heaader";
-import { PostModal } from "../components/PostModal";
-import React, { useContext } from "react";
-import { myContext } from "../components/ContextProvider";
-import { ContentBox } from "../components/ContentBox";
-import { PostsComponent } from "../components/Posts";
+import { myContext } from "../Context/ContextProvider";
+import Container from "../components/Container";
+import Header from "../components/Heaader";
+import PostModal from "../components/PostModal";
+import ContentBox from "../components/ContentBox";
+import PostsComponent from "../components/Posts";
 
 export const PostsPage = () => {
   const dispatch = useAppDispatch();
 
   const {
     currentPostId,
-    setCurrentPostId,
     currentUserId,
     isAddItemModalOpen,
     setIsAddItemModalOpen,

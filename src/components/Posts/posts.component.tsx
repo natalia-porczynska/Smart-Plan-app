@@ -1,7 +1,11 @@
 import React, { FunctionComponent, useContext } from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import { Card } from "../Card";
-import { Button } from "../Button";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { deletePost } from "../../api";
+import { myContext } from "../../Context/ContextProvider";
+import Card from "../Card";
+import Button from "../Button";
+import image from "../../assets/edit.png";
+
 import {
   DeleteButton,
   ButtonHolder,
@@ -9,10 +13,6 @@ import {
   Title,
   Content,
 } from "./posts.styles";
-import image from "../Users/edit.png";
-import { useAppDispatch } from "../../hooks/hooks";
-import { deletePost } from "../../api";
-import { myContext } from "../ContextProvider";
 
 type PostsComponentProps = {
   openModal: () => void;
@@ -25,15 +25,12 @@ export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
   const dispatch = useAppDispatch();
   const { currentUserId, setCurrentPostId } = useContext(myContext);
 
-  console.log(posts);
-
-  const onClick = (id: any) => {
-    console.log(id);
+  const handleDeletePost = (id: any) => {
     setCurrentPostId(id);
     dispatch(deletePost(id));
   };
 
-  const handleModal = (id: any) => {
+  const handleOpenModal = (id: any) => {
     setCurrentPostId(id);
     openModal();
   };
@@ -45,15 +42,13 @@ export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
         .map((post: any, index: any) => (
           <Card key={index}>
             <ButtonHolder>
-              <DeleteButton onClick={() => onClick(post._id)}>X </DeleteButton>
+              <DeleteButton onClick={() => handleDeletePost(post._id)}>
+                X{" "}
+              </DeleteButton>
             </ButtonHolder>
             <div>
               <Title>{post.title}</Title>
               <Content>{post.content}</Content>
-              <br></br>
-              {post.author}
-              <br></br>
-              {post._id}
               <br></br>
               <h4>{post.mail}</h4>
             </div>
@@ -65,7 +60,7 @@ export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
                 label={"comments"}
               />
 
-              <DeleteButton onClick={() => handleModal(post._id)}>
+              <DeleteButton onClick={() => handleOpenModal(post._id)}>
                 <img src={image} height="40px" width="40px" />
               </DeleteButton>
             </ButtonBottomHolder>
@@ -74,3 +69,5 @@ export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
     </>
   );
 };
+
+export default PostsComponent;

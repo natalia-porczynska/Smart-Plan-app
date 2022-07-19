@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
+import Button from "../Button";
 import { HeaderWrapper, HeaderTitle } from "./header.styles";
-import { Button } from "../Button";
-import { Link } from "react-router-dom";
 
 type HeaderProps = {
   href: string;
@@ -10,7 +9,8 @@ type HeaderProps = {
   rightButtonTitle: String;
   onClick: () => void;
 };
-export const Header: FunctionComponent<HeaderProps> = ({
+
+const Header: FunctionComponent<HeaderProps> = ({
   title,
   leftButtonTitle,
   rightButtonTitle,
@@ -30,3 +30,5 @@ export const Header: FunctionComponent<HeaderProps> = ({
     </HeaderWrapper>
   );
 };
+
+export default Header;

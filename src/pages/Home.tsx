@@ -1,13 +1,12 @@
-import { Users } from "../components/Users";
-import { useEffect } from "react";
-import { getUsers } from "../actions/users";
-import { Container } from "../components/Container";
+import React, { useContext, useEffect } from "react";
 import { useAppDispatch } from "../hooks/hooks";
-import { Header } from "../components/Heaader";
-import { ContentBox } from "../components/ContentBox";
-import { UserModal } from "../components/UserModal";
-import React, { useContext } from "react";
-import { myContext } from "../components/ContextProvider";
+import { getUsers } from "../actions/users";
+import { myContext } from "../Context/ContextProvider";
+import Users from "../components/Users";
+import Container from "../components/Container";
+import Header from "../components/Heaader";
+import ContentBox from "../components/ContentBox";
+import UserModal from "../components/UserModal";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +22,7 @@ export const Home = () => {
   useEffect(() => {
     dispatch(getUsers());
   }, [isAddItemModalOpen, isUpdateItemModalOpen, currentUserId]);
+
   return (
     <Container>
       <UserModal

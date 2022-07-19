@@ -1,8 +1,8 @@
 import { FunctionComponent, useContext, useState } from "react";
-import { useAppDispatch } from "../../hooks/hooks";
 import ReactDOM from "react-dom";
+import { useAppDispatch } from "../../hooks/hooks";
 import { createPost, updatePost } from "../../api";
-import { myContext } from "../ContextProvider";
+import { myContext } from "../../Context/ContextProvider";
 
 import {
   Modal,
@@ -18,15 +18,14 @@ type PostModalProps = {
   type: string;
 };
 
-export const PostModal: FunctionComponent<PostModalProps> = ({
+const PostModal: FunctionComponent<PostModalProps> = ({
   isOpen,
   onClick,
   type,
 }) => {
   const dispatch = useAppDispatch();
 
-  const { currentUserId, setCurrentUserId, currentPostId } =
-    useContext(myContext);
+  const { currentUserId, currentPostId } = useContext(myContext);
   const [inputs, setInputs] = useState({
     author: "",
     title: "",
@@ -44,14 +43,11 @@ export const PostModal: FunctionComponent<PostModalProps> = ({
     event.preventDefault();
     if (type === "UPDATE") {
       dispatch(updatePost(currentPostId, inputs));
-      console.log("uaktualniono post");
     } else {
       dispatch(createPost(inputs));
-      console.log("dodano post");
     }
   };
 
-  console.log(currentUserId);
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <Modal>
@@ -114,3 +110,5 @@ export const PostModal: FunctionComponent<PostModalProps> = ({
     document.body
   );
 };
+
+export default PostModal;

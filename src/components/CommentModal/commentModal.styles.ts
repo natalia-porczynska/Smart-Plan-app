@@ -1,5 +1,4 @@
-import styled, { keyframes } from "styled-components";
-import { Button } from "../Button";
+import styled from "styled-components";
 
 export const Modal = styled.div`
   height: 100vh;
@@ -56,6 +55,7 @@ export const SubmitButton = styled.input`
     filter: brightness(130%);
   }
 `;
+
 export const CancelButton = styled.button`
   width: 150px;
   height: 40px;

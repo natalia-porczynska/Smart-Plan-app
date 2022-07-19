@@ -1,7 +1,10 @@
 import React, { FunctionComponent, useContext } from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import { Card } from "../Card";
-import { Button } from "../Button";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { deleteComment } from "../../api";
+import { myContext } from "../../Context/ContextProvider";
+import Card from "../Card";
+import image from "../../assets/edit.png";
+
 import {
   DeleteButton,
   ButtonHolder,
@@ -9,32 +12,19 @@ import {
   Title,
   Content,
 } from "./comments.styles";
-import image from "../Users/edit.png";
-import { useAppDispatch } from "../../hooks/hooks";
-import { deleteComment } from "../../api";
-import { myContext } from "../ContextProvider";
 
 type CommentComponentProps = {
   openModal: () => void;
 };
 
-export const CommentComponent: FunctionComponent<CommentComponentProps> = ({
+const CommentComponent: FunctionComponent<CommentComponentProps> = ({
   openModal,
 }) => {
   const comments = useAppSelector((state: any) => state.comments);
   const dispatch = useAppDispatch();
-  const {
-    currentUserId,
-    setCurrentPostId,
-    currentPostId,
-    setCurrentCommentId,
-  } = useContext(myContext);
-
-  console.log(comments);
-  console.log("hello");
+  const { setCurrentCommentId, currentPostId } = useContext(myContext);
 
   const onClick = (id: any) => {
-    console.log(id);
     setCurrentCommentId(id);
     dispatch(deleteComment(id));
   };
@@ -46,33 +36,29 @@ export const CommentComponent: FunctionComponent<CommentComponentProps> = ({
 
   return (
     <>
-      {comments.map((comment: any, index: any) => (
-        <Card key={index}>
-          <ButtonHolder>
-            <DeleteButton onClick={() => onClick(comment._id)}>X </DeleteButton>
-          </ButtonHolder>
-          <div>
-            <Title>{comment.title}</Title>
-            <Content>{comment.content}</Content>
-            <br></br>
-            {comment.author}
-            <br></br>
-            <h4>{comment.mail}</h4>
-          </div>
-          <ButtonBottomHolder>
-            <Button
-              onClick={() => setCurrentCommentId(comment._id)}
-              href={"/postcomments"}
-              isPrimary={false}
-              label={"comments"}
-            />
-
-            <DeleteButton onClick={() => handleModal(comment._id)}>
-              <img src={image} height="40px" width="40px" />
-            </DeleteButton>
-          </ButtonBottomHolder>
-        </Card>
-      ))}
+      {comments
+        .filter((comment: any) => comment.target === currentPostId)
+        .map((comment: any, index: any) => (
+          <Card key={index}>
+            <ButtonHolder>
+              <DeleteButton onClick={() => onClick(comment._id)}>
+                X{" "}
+              </DeleteButton>
+            </ButtonHolder>
+            <div>
+              <Title>{comment.title}</Title>
+              <Content>{comment.content}</Content>s<br></br>
+              <h4>{comment.mail}</h4>
+            </div>
+            <ButtonBottomHolder>
+              <DeleteButton onClick={() => handleModal(comment._id)}>
+                <img src={image} height="40px" width="40px" />
+              </DeleteButton>
+            </ButtonBottomHolder>
+          </Card>
+        ))}
     </>
   );
 };
+
+export default CommentComponent;
