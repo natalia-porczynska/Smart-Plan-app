@@ -4,9 +4,9 @@ import { useAppDispatch } from "../hooks/hooks";
 import { myContext } from "../Context/ContextProvider";
 import Container from "../components/Container";
 import Header from "../components/Heaader";
-import PostModal from "../components/PostModal";
 import ContentBox from "../components/ContentBox";
 import PostsComponent from "../components/Posts";
+import ModalWindow from "../components/Modal";
 
 export const PostsPage = () => {
   const dispatch = useAppDispatch();
@@ -26,14 +26,16 @@ export const PostsPage = () => {
 
   return (
     <Container>
-      <PostModal
-        type="ADD"
+      <ModalWindow
         isOpen={isAddItemModalOpen}
+        type={"POST_MODAL"}
+        actionType={"ADD"}
         onClick={setIsAddItemModalOpen.off}
       />
-      <PostModal
-        type="UPDATE"
+      <ModalWindow
         isOpen={isUpdateItemModalOpen}
+        type={"POST_MODAL"}
+        actionType={"UPDATE"}
         onClick={setIsUpdateItemModalOpen.off}
       />
       <Header
