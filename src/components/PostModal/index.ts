@@ -1,1 +1,1 @@
-export { PostModal } from "./postModal.component";
+export { default } from "./postModal.component";

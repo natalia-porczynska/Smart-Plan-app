@@ -1,1 +1,1 @@
-export { UserModal } from "./userModal.component";
+export { default } from "./userModal.component";

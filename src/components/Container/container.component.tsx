@@ -4,6 +4,9 @@ import { ContainerWrapper } from "./container.styles";
 type ContainerProps = {
   children: React.ReactNode;
 };
-export const Container: FunctionComponent<ContainerProps> = ({ children }) => {
+
+const Container: FunctionComponent<ContainerProps> = ({ children }) => {
   return <ContainerWrapper>{children}</ContainerWrapper>;
 };
+
+export default Container;

@@ -1,5 +1,4 @@
-import styled, { keyframes } from "styled-components";
-import { Button } from "../Button";
+import styled from "styled-components";
 
 export const Modal = styled.div`
   height: 100vh;

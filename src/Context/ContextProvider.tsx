@@ -1,6 +1,5 @@
 import React, { useState, createContext } from "react";
 import { useBoolean } from "@chakra-ui/hooks";
-import { useAppDispatch } from "../hooks/hooks";
 
 export const myContext = createContext<
   React.Dispatch<React.SetStateAction<any>> | any | null

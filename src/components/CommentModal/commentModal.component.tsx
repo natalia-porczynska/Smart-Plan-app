@@ -1,8 +1,8 @@
 import { FunctionComponent, useContext, useState } from "react";
-import { useAppDispatch } from "../../hooks/hooks";
 import ReactDOM from "react-dom";
+import { useAppDispatch } from "../../hooks/hooks";
 import { createComment, updateComment } from "../../api";
-import { myContext } from "../ContextProvider";
+import { myContext } from "../../Context/ContextProvider";
 
 import {
   Modal,
@@ -18,20 +18,15 @@ type CommentModalProps = {
   type: string;
 };
 
-export const CommentModal: FunctionComponent<CommentModalProps> = ({
+const CommentModal: FunctionComponent<CommentModalProps> = ({
   isOpen,
   onClick,
   type,
 }) => {
   const dispatch = useAppDispatch();
 
-  const {
-    currentUserId,
-    setCurrentUserId,
-    currentPostId,
-    currentCommentId,
-    setCurrentCommentId,
-  } = useContext(myContext);
+  const { currentUserId, currentPostId, currentCommentId } =
+    useContext(myContext);
 
   const [inputs, setInputs] = useState({
     author: "",
@@ -51,14 +46,11 @@ export const CommentModal: FunctionComponent<CommentModalProps> = ({
     event.preventDefault();
     if (type === "UPDATE") {
       dispatch(updateComment(currentCommentId, inputs));
-      console.log("uaktualniono komentarz");
     } else {
       dispatch(createComment(inputs));
-      console.log("dodano komentarz");
     }
   };
 
-  console.log(currentPostId);
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <Modal>
@@ -116,7 +108,7 @@ export const CommentModal: FunctionComponent<CommentModalProps> = ({
 
               <input
                 type="text"
-                name="mail"
+                name="target"
                 defaultValue={currentPostId}
                 className="input"
                 onClick={handleChange}
@@ -133,3 +125,5 @@ export const CommentModal: FunctionComponent<CommentModalProps> = ({
     document.body
   );
 };
+
+export default CommentModal;

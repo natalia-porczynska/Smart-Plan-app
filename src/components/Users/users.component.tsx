@@ -1,24 +1,20 @@
 import React, { FunctionComponent, useContext } from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import { Card } from "../Card";
-import { Button } from "../Button";
-import { DeleteButton, ButtonHolder, ButtonBottomHolder } from "./users.styles";
-import image from "./edit.png";
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { deleteUser } from "../../api";
-import { myContext } from "../ContextProvider";
-
+import { myContext } from "../../Context/ContextProvider";
+import Card from "../Card";
+import Button from "../Button";
+import image from "../../assets/edit.png";
+import { DeleteButton, ButtonHolder, ButtonBottomHolder } from "./users.styles";
 type UsersProps = {
   openModal: () => void;
 };
 
-export const Users: FunctionComponent<UsersProps> = ({ openModal }) => {
+const Users: FunctionComponent<UsersProps> = ({ openModal }) => {
   const users = useAppSelector((state: any) => state.users);
   const dispatch = useAppDispatch();
 
-  const { currentUserId, setCurrentUserId } = useContext(myContext);
-
-  console.log(users);
+  const { setCurrentUserId } = useContext(myContext);
 
   const onClick = (id: any) => {
     setCurrentUserId(id);
@@ -63,3 +59,5 @@ export const Users: FunctionComponent<UsersProps> = ({ openModal }) => {
     </>
   );
 };
+
+export default Users;

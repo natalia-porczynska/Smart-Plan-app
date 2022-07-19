@@ -5,6 +5,8 @@ type CardProps = {
   children: React.ReactNode;
 };
 
-export const Card: FunctionComponent<CardProps> = ({ children }) => {
+const Card: FunctionComponent<CardProps> = ({ children }) => {
   return <CardWrapper>{children}</CardWrapper>;
 };
+
+export default Card;

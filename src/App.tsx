@@ -1,6 +1,6 @@
 import React from "react";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import { Home } from "./pages/Home";
 import { PostsPage } from "./pages/PostsPage";
 import { CommentsPage } from "./pages/CommentsPage";

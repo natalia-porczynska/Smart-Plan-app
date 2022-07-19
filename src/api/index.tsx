@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const urlPosts = "http://localhost:8000/posts";
-const urlUsers = "http://localhost:8000/users";
-const urlComments = "http://localhost:8000/comments";
+const connectionUrl = "http://localhost:8000/";
+
+const urlPosts = `${connectionUrl}posts`;
+const urlUsers = `${connectionUrl}users`;
+const urlComments = `${connectionUrl}comments`;
 
 export const fetchPosts = () => axios.get(urlPosts);
 export const createPost = (newPost: any) => axios.post(urlPosts, newPost);

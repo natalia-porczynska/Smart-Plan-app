@@ -1,1 +1,1 @@
-export { ContentBox } from "./contentBox.component";
+export { default } from "./contentBox.component";

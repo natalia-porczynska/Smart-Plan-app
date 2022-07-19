@@ -1,13 +1,12 @@
-import { useEffect } from "react";
-import { getComments } from "../actions/comments";
-import { Container } from "../components/Container";
+import React, { useContext, useEffect } from "react";
 import { useAppDispatch } from "../hooks/hooks";
-import { Header } from "../components/Heaader";
-import { CommentModal } from "../components/CommentModal";
-import React, { useContext } from "react";
-import { myContext } from "../components/ContextProvider";
-import { ContentBox } from "../components/ContentBox";
-import { CommentComponent } from "../components/Comments";
+import { myContext } from "../Context/ContextProvider";
+import { getComments } from "../actions/comments";
+import Container from "../components/Container";
+import Header from "../components/Heaader";
+import CommentModal from "../components/CommentModal";
+import ContentBox from "../components/ContentBox";
+import CommentComponent from "../components/Comments";
 
 export const CommentsPage = () => {
   const dispatch = useAppDispatch();
@@ -15,8 +14,6 @@ export const CommentsPage = () => {
   const {
     currentPostId,
     currentCommentId,
-    setCurrentCommentId,
-    currentUserId,
     isAddItemModalOpen,
     setIsAddItemModalOpen,
     isUpdateItemModalOpen,
