@@ -4,9 +4,9 @@ import { myContext } from "../Context/ContextProvider";
 import { getComments } from "../actions/comments";
 import Container from "../components/Container";
 import Header from "../components/Heaader";
-import CommentModal from "../components/CommentModal";
 import ContentBox from "../components/ContentBox";
 import CommentComponent from "../components/Comments";
+import ModalWindow from "../components/Modal";
 
 export const CommentsPage = () => {
   const dispatch = useAppDispatch();
@@ -26,14 +26,16 @@ export const CommentsPage = () => {
 
   return (
     <Container>
-      <CommentModal
-        type="ADD"
+      <ModalWindow
         isOpen={isAddItemModalOpen}
+        type={"COMMENT_MODAL"}
+        actionType={"ADD"}
         onClick={setIsAddItemModalOpen.off}
       />
-      <CommentModal
-        type="UPDATE"
+      <ModalWindow
         isOpen={isUpdateItemModalOpen}
+        type={"COMMENT_MODAL"}
+        actionType={"UPDATE"}
         onClick={setIsUpdateItemModalOpen.off}
       />
       <Header
