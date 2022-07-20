@@ -7,6 +7,7 @@ import Container from "../components/Container";
 import Header from "../components/Heaader";
 import ContentBox from "../components/ContentBox";
 import ModalWindow from "../components/Modal";
+import { ActionType, ModalType } from "../components/Modal/modal.types";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -27,15 +28,15 @@ export const Home = () => {
     <Container>
       <ModalWindow
         isOpen={isAddItemModalOpen}
-        type={"USER_MODAL"}
-        actionType={"ADD"}
-        onClick={setIsAddItemModalOpen.off}
+        type={ModalType.USER_MODAL}
+        actionType={ActionType.ADD}
+        closeModal={setIsAddItemModalOpen.off}
       />
       <ModalWindow
         isOpen={isUpdateItemModalOpen}
-        type={"USER_MODAL"}
-        actionType={"UPDATE"}
-        onClick={setIsUpdateItemModalOpen.off}
+        type={ModalType.USER_MODAL}
+        actionType={ActionType.UPDATE}
+        closeModal={setIsUpdateItemModalOpen.off}
       />
       <Header
         href={" "}
