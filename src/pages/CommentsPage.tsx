@@ -8,6 +8,8 @@ import ContentBox from "../components/ContentBox";
 import CommentComponent from "../components/Comments";
 import ModalWindow from "../components/Modal";
 import { ActionType, ModalType } from "../components/Modal/modal.types";
+import { HeaderTitle } from "../components/Heaader/header.types";
+import { ButtonLabel } from "../components/Button/button.types";
 
 export const CommentsPage = () => {
   const dispatch = useAppDispatch();
@@ -41,9 +43,9 @@ export const CommentsPage = () => {
       />
       <Header
         href="/userposts"
-        title={"Post ID: " + currentPostId}
-        leftButtonTitle={"go back"}
-        rightButtonTitle={"add comment"}
+        title={HeaderTitle.COMMENT_PAGE + currentPostId}
+        leftButtonTitle={ButtonLabel.GO_BACK}
+        rightButtonTitle={ButtonLabel.ADD_COMMENT}
         onClick={setIsAddItemModalOpen.on}
       ></Header>
       <ContentBox>

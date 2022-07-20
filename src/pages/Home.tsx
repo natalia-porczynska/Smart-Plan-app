@@ -8,6 +8,8 @@ import Header from "../components/Heaader";
 import ContentBox from "../components/ContentBox";
 import ModalWindow from "../components/Modal";
 import { ActionType, ModalType } from "../components/Modal/modal.types";
+import { HeaderTitle } from "../components/Heaader/header.types";
+import { ButtonLabel } from "../components/Button/button.types";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -40,9 +42,9 @@ export const Home = () => {
       />
       <Header
         href={" "}
-        title={"HOMEPAGE"}
-        leftButtonTitle={"welcome to my app!"}
-        rightButtonTitle={"add user"}
+        title={HeaderTitle.HOMEPAGE}
+        leftButtonTitle={ButtonLabel.WELCOME}
+        rightButtonTitle={ButtonLabel.ADD_USER}
         onClick={setIsAddItemModalOpen.on}
       ></Header>
       <ContentBox>

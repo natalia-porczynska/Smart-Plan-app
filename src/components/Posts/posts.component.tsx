@@ -5,6 +5,7 @@ import { myContext } from "../../Context/ContextProvider";
 import Card from "../Card";
 import Button from "../Button";
 import image from "../../assets/edit.png";
+import { ButtonLabel } from "../Button/button.types";
 
 import {
   DeleteButton,
@@ -57,7 +58,7 @@ export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
                 onClick={() => setCurrentPostId(post._id)}
                 href={"/postcomments"}
                 isPrimary={false}
-                label={"comments"}
+                label={ButtonLabel.COMMENTS}
               />
 
               <DeleteButton onClick={() => handleOpenModal(post._id)}>

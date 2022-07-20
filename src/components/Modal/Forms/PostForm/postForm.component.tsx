@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../../../hooks/hooks";
 import { createPost, updatePost } from "../../../../api";
 import { myContext } from "../../../../Context/ContextProvider";
 import { ActionType } from "../../modal.types";
-
+import { InputType, InputName } from "../form.types";
 import { Form, SubmitButton, CancelButton } from "../Form.styles";
 
 type PostFormProps = {
@@ -17,25 +17,13 @@ const PostForm: FunctionComponent<PostFormProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const {
-    currentUserId,
-    currentPostId,
-    setIsUpdateItemModalOpen,
-    setIsAddItemModalOpen,
-  } = useContext(myContext);
+  const { currentUserId, currentPostId } = useContext(myContext);
   const [inputs, setInputs] = useState({
     author: "",
     title: "",
     content: "",
     mail: "",
   });
-  const handleCloseModal = () => {
-    if (actionType === "UPDATE") {
-      setIsUpdateItemModalOpen(false);
-    } else {
-      setIsAddItemModalOpen(false);
-    }
-  };
 
   const handleChange = (event: any) => {
     const name = event.target.name;
@@ -43,9 +31,9 @@ const PostForm: FunctionComponent<PostFormProps> = ({
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleUserSubmit = (event: any) => {
+  const handlePostSubmit = (event: any) => {
     event.preventDefault();
-    if (actionType === "UPDATE") {
+    if (actionType === ActionType.UPDATE) {
       dispatch(updatePost(currentPostId, inputs));
     } else {
       dispatch(createPost(inputs));
@@ -53,13 +41,13 @@ const PostForm: FunctionComponent<PostFormProps> = ({
   };
 
   return (
-    <Form onSubmit={handleUserSubmit}>
+    <Form onSubmit={handlePostSubmit}>
       <>
         <label>
           <div>AuthorId:</div>
           <input
-            type="text"
-            name="author"
+            type={InputType.TEXT}
+            name={InputName.AUTHOR}
             defaultValue={currentUserId}
             className="input"
             onClick={handleChange}
@@ -70,8 +58,8 @@ const PostForm: FunctionComponent<PostFormProps> = ({
         <label>
           <div>Title:</div>
           <input
-            type="text"
-            name="title"
+            type={InputType.TEXT}
+            name={InputName.TITLE}
             value={inputs.title || ""}
             className="input"
             onChange={handleChange}
@@ -81,8 +69,8 @@ const PostForm: FunctionComponent<PostFormProps> = ({
         <label>
           <div>Content:</div>
           <input
-            type="text"
-            name="content"
+            type={InputType.TEXT}
+            name={InputName.CONTENT}
             value={inputs.content || ""}
             className="input"
             onChange={handleChange}
@@ -93,8 +81,8 @@ const PostForm: FunctionComponent<PostFormProps> = ({
           <div>Mail:</div>
 
           <input
-            type="text"
-            name="mail"
+            type={InputType.TEXT}
+            name={InputName.MAIL}
             value={inputs.mail || ""}
             className="input"
             onChange={handleChange}
@@ -102,7 +90,7 @@ const PostForm: FunctionComponent<PostFormProps> = ({
         </label>
         <br></br>
       </>
-      <SubmitButton type="submit" value="accept"></SubmitButton>
+      <SubmitButton type={InputType.SUBMIT} value="accept"></SubmitButton>
       <br></br>
       <CancelButton onClick={closeModal}> Close</CancelButton>
     </Form>

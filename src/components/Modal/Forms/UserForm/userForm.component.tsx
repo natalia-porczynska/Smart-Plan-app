@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../../../hooks/hooks";
 import { createUser, updateUser } from "../../../../api";
 import { myContext } from "../../../../Context/ContextProvider";
 import { ActionType } from "../../modal.types";
-
+import { InputType, InputName } from "../form.types";
 import { Form, SubmitButton, CancelButton } from "../Form.styles";
 
 type UserFormProps = {
@@ -17,8 +17,7 @@ const UserForm: FunctionComponent<UserFormProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const { currentUserId, setIsAddItemModalOpen, setIsUpdateItemModalOpen } =
-    useContext(myContext);
+  const { currentUserId } = useContext(myContext);
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -35,18 +34,9 @@ const UserForm: FunctionComponent<UserFormProps> = ({
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleCloseModal = () => {
-    if (actionType === "UPDATE") {
-      console.log("lala");
-      setIsUpdateItemModalOpen(false);
-    } else {
-      setIsAddItemModalOpen(false);
-    }
-  };
-
   const handleUserSubmit = (event: any) => {
     event.preventDefault();
-    if (actionType === "UPDATE") {
+    if (actionType === ActionType.UPDATE) {
       dispatch(updateUser(currentUserId, inputs));
     } else {
       dispatch(createUser(inputs));
@@ -59,8 +49,8 @@ const UserForm: FunctionComponent<UserFormProps> = ({
         <label>
           <div>Mail:</div>
           <input
-            type="text"
-            name="mail"
+            type={InputType.TEXT}
+            name={InputName.MAIL}
             value={inputs.mail || ""}
             className="input"
             onChange={handleChange}
@@ -70,8 +60,8 @@ const UserForm: FunctionComponent<UserFormProps> = ({
         <label>
           <div>Name:</div>
           <input
-            type="text"
-            name="name"
+            type={InputType.TEXT}
+            name={InputName.NAME}
             value={inputs.name || ""}
             className="input"
             onChange={handleChange}
@@ -81,8 +71,8 @@ const UserForm: FunctionComponent<UserFormProps> = ({
         <label>
           <div>Surename:</div>
           <input
-            type="text"
-            name="surename"
+            type={InputType.TEXT}
+            name={InputName.SURENAME}
             value={inputs.surename || ""}
             className="input"
             onChange={handleChange}
@@ -93,8 +83,8 @@ const UserForm: FunctionComponent<UserFormProps> = ({
           <div>Job:</div>
 
           <input
-            type="text"
-            name="job"
+            type={InputType.TEXT}
+            name={InputName.JOB}
             value={inputs.job || ""}
             className="input"
             onChange={handleChange}
@@ -104,8 +94,8 @@ const UserForm: FunctionComponent<UserFormProps> = ({
         <label>
           <div>Town:</div>
           <input
-            type="text"
-            name="town"
+            type={InputType.TEXT}
+            name={InputName.TOWN}
             value={inputs.town || ""}
             className="input"
             onChange={handleChange}
@@ -115,8 +105,8 @@ const UserForm: FunctionComponent<UserFormProps> = ({
         <label>
           <div>Age:</div>
           <input
-            type="text"
-            name="age"
+            type={InputType.TEXT}
+            name={InputName.AGE}
             value={inputs.age || ""}
             className="input"
             onChange={handleChange}
@@ -124,7 +114,7 @@ const UserForm: FunctionComponent<UserFormProps> = ({
         </label>
         <br></br>
       </>
-      <SubmitButton type="submit" value="accept"></SubmitButton>
+      <SubmitButton type={InputType.SUBMIT} value="accept"></SubmitButton>
       <br></br>
       <CancelButton onClick={closeModal}>Close</CancelButton>
     </Form>

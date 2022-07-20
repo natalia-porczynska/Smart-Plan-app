@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../../../hooks/hooks";
 import { createComment, updateComment } from "../../../../api";
 import { myContext } from "../../../../Context/ContextProvider";
 import { ActionType } from "../../modal.types";
-
+import { InputType, InputName } from "../form.types";
 import { Form, SubmitButton, CancelButton } from "../Form.styles";
 
 type CommentFormProps = {
@@ -17,13 +17,8 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const {
-    currentUserId,
-    currentPostId,
-    currentCommentId,
-    setIsUpdateItemModalOpen,
-    setIsAddItemModalOpen,
-  } = useContext(myContext);
+  const { currentUserId, currentPostId, currentCommentId } =
+    useContext(myContext);
 
   const [inputs, setInputs] = useState({
     author: "",
@@ -33,23 +28,15 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
     target: "",
   });
 
-  const handleCloseModal = () => {
-    if (actionType === "UPDATE") {
-      setIsUpdateItemModalOpen(false);
-    } else {
-      setIsAddItemModalOpen(false);
-    }
-  };
-
   const handleChange = (event: any) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleUserSubmit = (event: any) => {
+  const handleCommentSubmit = (event: any) => {
     event.preventDefault();
-    if (actionType === "UPDATE") {
+    if (actionType === ActionType.UPDATE) {
       dispatch(updateComment(currentCommentId, inputs));
     } else {
       dispatch(createComment(inputs));
@@ -58,13 +45,13 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
 
   return (
     <>
-      <Form onSubmit={handleUserSubmit}>
+      <Form onSubmit={handleCommentSubmit}>
         <>
           <label>
             <div>AuthorId:</div>
             <input
-              type="text"
-              name="author"
+              type={InputType.TEXT}
+              name={InputName.AUTHOR}
               defaultValue={currentUserId}
               className="input"
               onClick={handleChange}
@@ -75,8 +62,8 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
           <label>
             <div>Title:</div>
             <input
-              type="text"
-              name="title"
+              type={InputType.TEXT}
+              name={InputName.TITLE}
               value={inputs.title || ""}
               className="input"
               onChange={handleChange}
@@ -86,8 +73,8 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
           <label>
             <div>Content:</div>
             <input
-              type="text"
-              name="content"
+              type={InputType.TEXT}
+              name={InputName.CONTENT}
               value={inputs.content || ""}
               className="input"
               onChange={handleChange}
@@ -98,8 +85,8 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
             <div>Mail:</div>
 
             <input
-              type="text"
-              name="mail"
+              type={InputType.TEXT}
+              name={InputName.MAIL}
               value={inputs.mail || ""}
               className="input"
               onChange={handleChange}
@@ -110,8 +97,8 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
             <div>Target:</div>
 
             <input
-              type="text"
-              name="target"
+              type={InputType.TEXT}
+              name={InputName.TARGET}
               defaultValue={currentPostId}
               className="input"
               onClick={handleChange}
@@ -119,7 +106,7 @@ const CommentForm: FunctionComponent<CommentFormProps> = ({
           </label>
           <br></br>
         </>
-        <SubmitButton type="submit" value="accept"></SubmitButton>
+        <SubmitButton type={InputType.SUBMIT} value="accept"></SubmitButton>
         <br></br>
         <CancelButton onClick={closeModal}> Close</CancelButton>
       </Form>

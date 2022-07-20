@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent } from "react";
 import ReactDOM from "react-dom";
 import UserForm from "./Forms/UserForm";
 import PostForm from "./Forms/PostForm";
@@ -23,13 +23,13 @@ const ModalWindow: FunctionComponent<ModalProps> = ({
   return ReactDOM.createPortal(
     <Modal>
       <WindowCard>
-        {type === "USER_MODAL" && (
+        {type === ModalType.USER_MODAL && (
           <UserForm actionType={actionType} closeModal={closeModal} />
         )}
-        {type === "COMMENT_MODAL" && (
+        {type === ModalType.COMMENT_MODAL && (
           <CommentForm actionType={actionType} closeModal={closeModal} />
         )}
-        {type === "POST_MODAL" && (
+        {type === ModalType.POST_MODAL && (
           <PostForm actionType={actionType} closeModal={closeModal} />
         )}
       </WindowCard>

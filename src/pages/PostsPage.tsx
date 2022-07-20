@@ -8,6 +8,8 @@ import ContentBox from "../components/ContentBox";
 import PostsComponent from "../components/Posts";
 import ModalWindow from "../components/Modal";
 import { ActionType, ModalType } from "../components/Modal/modal.types";
+import { HeaderTitle } from "../components/Heaader/header.types";
+import { ButtonLabel } from "../components/Button/button.types";
 
 export const PostsPage = () => {
   const dispatch = useAppDispatch();
@@ -41,9 +43,9 @@ export const PostsPage = () => {
       />
       <Header
         href="/"
-        title={"USER ID: " + currentUserId}
-        leftButtonTitle={"go back"}
-        rightButtonTitle={"add post"}
+        title={HeaderTitle.POST_PAGE + currentUserId}
+        leftButtonTitle={ButtonLabel.GO_BACK}
+        rightButtonTitle={ButtonLabel.ADD_POST}
         onClick={setIsAddItemModalOpen.on}
       ></Header>
       <ContentBox>

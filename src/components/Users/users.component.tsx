@@ -6,6 +6,8 @@ import Card from "../Card";
 import Button from "../Button";
 import image from "../../assets/edit.png";
 import { DeleteButton, ButtonHolder, ButtonBottomHolder } from "./users.styles";
+import { ButtonLabel } from "../Button/button.types";
+
 type UsersProps = {
   openModal: () => void;
 };
@@ -16,7 +18,7 @@ const Users: FunctionComponent<UsersProps> = ({ openModal }) => {
 
   const { setCurrentUserId } = useContext(myContext);
 
-  const onClick = (id: any) => {
+  const handleDeleteUser = (id: any) => {
     setCurrentUserId(id);
     dispatch(deleteUser(id));
   };
@@ -31,7 +33,9 @@ const Users: FunctionComponent<UsersProps> = ({ openModal }) => {
       {users.map((user: any, index: any) => (
         <Card key={index}>
           <ButtonHolder>
-            <DeleteButton onClick={() => onClick(user._id)}>X </DeleteButton>
+            <DeleteButton onClick={() => handleDeleteUser(user._id)}>
+              X{" "}
+            </DeleteButton>
           </ButtonHolder>
           <div>
             {user.name} {user.surename}
@@ -47,7 +51,7 @@ const Users: FunctionComponent<UsersProps> = ({ openModal }) => {
               onClick={() => setCurrentUserId(user._id)}
               href={"/userposts"}
               isPrimary={false}
-              label={"user posts"}
+              label={ButtonLabel.POSTS}
             />
 
             <DeleteButton onClick={() => handleModal(user._id)}>

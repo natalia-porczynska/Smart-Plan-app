@@ -6,8 +6,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store";
 import { ContextProvider } from "./Context/ContextProvider";
-import history from "./history";
 import "./index.css";
+import GlobalCSS from "./global.styles";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,6 +18,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <ContextProvider>
+          <GlobalCSS />
           <App />
         </ContextProvider>
       </BrowserRouter>

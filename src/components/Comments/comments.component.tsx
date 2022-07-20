@@ -24,7 +24,7 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
   const dispatch = useAppDispatch();
   const { setCurrentCommentId, currentPostId } = useContext(myContext);
 
-  const onClick = (id: any) => {
+  const handleDeleteComment = (id: any) => {
     setCurrentCommentId(id);
     dispatch(deleteComment(id));
   };
@@ -41,7 +41,7 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
         .map((comment: any, index: any) => (
           <Card key={index}>
             <ButtonHolder>
-              <DeleteButton onClick={() => onClick(comment._id)}>
+              <DeleteButton onClick={() => handleDeleteComment(comment._id)}>
                 X{" "}
               </DeleteButton>
             </ButtonHolder>

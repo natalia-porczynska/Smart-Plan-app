@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 type ButtonProps = {
   isPrimary: boolean;
-  label: String;
+  label: string;
   href: string;
   onClick?: () => void;
 };

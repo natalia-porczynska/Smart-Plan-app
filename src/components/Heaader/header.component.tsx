@@ -4,9 +4,9 @@ import { HeaderWrapper, HeaderTitle } from "./header.styles";
 
 type HeaderProps = {
   href: string;
-  title: String;
-  leftButtonTitle: String;
-  rightButtonTitle: String;
+  title: string;
+  leftButtonTitle: string;
+  rightButtonTitle: string;
   onClick: () => void;
 };
 
