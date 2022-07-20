@@ -1,18 +1,19 @@
 import { FunctionComponent, useContext, useState } from "react";
-import { useAppDispatch } from "../../hooks/hooks";
-import { createUser, updateUser } from "../../api";
-import { myContext } from "../../Context/ContextProvider";
+import { useAppDispatch } from "../../../../hooks/hooks";
+import { createUser, updateUser } from "../../../../api";
+import { myContext } from "../../../../Context/ContextProvider";
+import { ActionType } from "../../modal.types";
 
-import { Form, SubmitButton, CancelButton } from "./userForm.styles";
+import { Form, SubmitButton, CancelButton } from "../Form.styles";
 
 type UserFormProps = {
-  actionType: "ADD" | "UPDATE";
-  onClick: () => void;
+  actionType: ActionType;
+  closeModal: () => void;
 };
 
 const UserForm: FunctionComponent<UserFormProps> = ({
   actionType,
-  onClick,
+  closeModal,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -125,7 +126,7 @@ const UserForm: FunctionComponent<UserFormProps> = ({
       </>
       <SubmitButton type="submit" value="accept"></SubmitButton>
       <br></br>
-      <CancelButton onClick={onClick}>Close</CancelButton>
+      <CancelButton onClick={closeModal}>Close</CancelButton>
     </Form>
   );
 };

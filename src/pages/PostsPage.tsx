@@ -7,6 +7,7 @@ import Header from "../components/Heaader";
 import ContentBox from "../components/ContentBox";
 import PostsComponent from "../components/Posts";
 import ModalWindow from "../components/Modal";
+import { ActionType, ModalType } from "../components/Modal/modal.types";
 
 export const PostsPage = () => {
   const dispatch = useAppDispatch();
@@ -28,15 +29,15 @@ export const PostsPage = () => {
     <Container>
       <ModalWindow
         isOpen={isAddItemModalOpen}
-        type={"POST_MODAL"}
-        actionType={"ADD"}
-        onClick={setIsAddItemModalOpen.off}
+        type={ModalType.POST_MODAL}
+        actionType={ActionType.ADD}
+        closeModal={setIsAddItemModalOpen.off}
       />
       <ModalWindow
         isOpen={isUpdateItemModalOpen}
-        type={"POST_MODAL"}
-        actionType={"UPDATE"}
-        onClick={setIsUpdateItemModalOpen.off}
+        type={ModalType.POST_MODAL}
+        actionType={ActionType.UPDATE}
+        closeModal={setIsUpdateItemModalOpen.off}
       />
       <Header
         href="/"

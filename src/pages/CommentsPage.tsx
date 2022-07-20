@@ -7,6 +7,7 @@ import Header from "../components/Heaader";
 import ContentBox from "../components/ContentBox";
 import CommentComponent from "../components/Comments";
 import ModalWindow from "../components/Modal";
+import { ActionType, ModalType } from "../components/Modal/modal.types";
 
 export const CommentsPage = () => {
   const dispatch = useAppDispatch();
@@ -28,15 +29,15 @@ export const CommentsPage = () => {
     <Container>
       <ModalWindow
         isOpen={isAddItemModalOpen}
-        type={"COMMENT_MODAL"}
-        actionType={"ADD"}
-        onClick={setIsAddItemModalOpen.off}
+        type={ModalType.COMMENT_MODAL}
+        actionType={ActionType.ADD}
+        closeModal={setIsAddItemModalOpen.off}
       />
       <ModalWindow
         isOpen={isUpdateItemModalOpen}
-        type={"COMMENT_MODAL"}
-        actionType={"UPDATE"}
-        onClick={setIsUpdateItemModalOpen.off}
+        type={ModalType.COMMENT_MODAL}
+        actionType={ActionType.UPDATE}
+        closeModal={setIsUpdateItemModalOpen.off}
       />
       <Header
         href="/userposts"
