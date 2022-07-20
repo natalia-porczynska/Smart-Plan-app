@@ -20,9 +20,13 @@ type CommentComponentProps = {
 const CommentComponent: FunctionComponent<CommentComponentProps> = ({
   openModal,
 }) => {
-  const comments = useAppSelector((state: any) => state.comments);
   const dispatch = useAppDispatch();
   const { setCurrentCommentId, currentPostId } = useContext(myContext);
+
+  const comments = useAppSelector((state: any) => state.comments);
+  const filteredComments = comments.filter(
+    (comment: any) => comment.target === currentPostId
+  );
 
   const handleDeleteComment = (id: any) => {
     setCurrentCommentId(id);
@@ -36,27 +40,25 @@ const CommentComponent: FunctionComponent<CommentComponentProps> = ({
 
   return (
     <>
-      {comments
-        .filter((comment: any) => comment.target === currentPostId)
-        .map((comment: any, index: any) => (
-          <Card key={index}>
-            <ButtonHolder>
-              <DeleteButton onClick={() => handleDeleteComment(comment._id)}>
-                X{" "}
-              </DeleteButton>
-            </ButtonHolder>
-            <div>
-              <Title>{comment.title}</Title>
-              <Content>{comment.content}</Content>s<br></br>
-              <h4>{comment.mail}</h4>
-            </div>
-            <ButtonBottomHolder>
-              <DeleteButton onClick={() => handleModal(comment._id)}>
-                <img src={image} height="40px" width="40px" />
-              </DeleteButton>
-            </ButtonBottomHolder>
-          </Card>
-        ))}
+      {filteredComments.map((comment: any, index: any) => (
+        <Card key={index}>
+          <ButtonHolder>
+            <DeleteButton onClick={() => handleDeleteComment(comment._id)}>
+              X{" "}
+            </DeleteButton>
+          </ButtonHolder>
+          <div>
+            <Title>{comment.title}</Title>
+            <Content>{comment.content}</Content>s<br></br>
+            <h4>{comment.mail}</h4>
+          </div>
+          <ButtonBottomHolder>
+            <DeleteButton onClick={() => handleModal(comment._id)}>
+              <img src={image} height="40px" width="40px" />
+            </DeleteButton>
+          </ButtonBottomHolder>
+        </Card>
+      ))}
     </>
   );
 };

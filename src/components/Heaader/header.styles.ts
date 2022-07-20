@@ -19,7 +19,6 @@ export const HeaderTitle = styled.h1`
   align-items: center;
   width: 300px;
   height: 100px;
-  font-family: Lato, sans-serif;
   font-size: 2.5rem;
   text-transform: uppercase;
   color: white;

@@ -10,8 +10,8 @@ type ButtonProps = {
 };
 
 const Button: FunctionComponent<ButtonProps> = ({
-  isPrimary = true,
-  label = "go back",
+  isPrimary,
+  label,
   href,
   onClick,
 }) => {

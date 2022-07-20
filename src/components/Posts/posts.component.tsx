@@ -22,9 +22,13 @@ type PostsComponentProps = {
 export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
   openModal,
 }) => {
-  const posts = useAppSelector((state: any) => state.posts);
   const dispatch = useAppDispatch();
   const { currentUserId, setCurrentPostId } = useContext(myContext);
+
+  const posts = useAppSelector((state: any) => state.posts);
+  const filteredPosts = posts.filter(
+    (post: any) => post.author === currentUserId
+  );
 
   const handleDeletePost = (id: any) => {
     setCurrentPostId(id);
@@ -38,35 +42,33 @@ export const PostsComponent: FunctionComponent<PostsComponentProps> = ({
 
   return (
     <>
-      {posts
-        .filter((post: any) => post.author === currentUserId)
-        .map((post: any, index: any) => (
-          <Card key={index}>
-            <ButtonHolder>
-              <DeleteButton onClick={() => handleDeletePost(post._id)}>
-                X{" "}
-              </DeleteButton>
-            </ButtonHolder>
-            <div>
-              <Title>{post.title}</Title>
-              <Content>{post.content}</Content>
-              <br></br>
-              <h4>{post.mail}</h4>
-            </div>
-            <ButtonBottomHolder>
-              <Button
-                onClick={() => setCurrentPostId(post._id)}
-                href={"/postcomments"}
-                isPrimary={false}
-                label={ButtonLabel.COMMENTS}
-              />
+      {filteredPosts.map((post: any, index: any) => (
+        <Card key={index}>
+          <ButtonHolder>
+            <DeleteButton onClick={() => handleDeletePost(post._id)}>
+              X{" "}
+            </DeleteButton>
+          </ButtonHolder>
+          <div>
+            <Title>{post.title}</Title>
+            <Content>{post.content}</Content>
+            <br></br>
+            <h4>{post.mail}</h4>
+          </div>
+          <ButtonBottomHolder>
+            <Button
+              onClick={() => setCurrentPostId(post._id)}
+              href={"/postcomments"}
+              isPrimary={false}
+              label={ButtonLabel.COMMENTS}
+            />
 
-              <DeleteButton onClick={() => handleOpenModal(post._id)}>
-                <img src={image} height="40px" width="40px" />
-              </DeleteButton>
-            </ButtonBottomHolder>
-          </Card>
-        ))}
+            <DeleteButton onClick={() => handleOpenModal(post._id)}>
+              <img src={image} height="40px" width="40px" />
+            </DeleteButton>
+          </ButtonBottomHolder>
+        </Card>
+      ))}
     </>
   );
 };
